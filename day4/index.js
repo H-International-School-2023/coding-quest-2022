@@ -1,17 +1,18 @@
 const fs = require('fs');
 
-const fileData = fs.readFileSync('./data', 'utf-8');
+const fileData = fs.readFileSync('./sample_data', 'utf-8');
 
 const rows = fileData.split('\n');
-const locations = [];
-for (let i = 0; i < rows.length; i = i + 1) {
+
+const games = [];
+for (let i = 0; i < rows.length; i = i + 1) { // loop all the games
   const row = rows[i];
-  const numbers = row.split(' ');
-  const coordinate = [];
-  for (let j = 0; j < numbers.length; j = j + 1) {
-    const number = numbers[j];
-    const n = parseInt(number);
-    coordinate.push(n);
+  const characters = row.split(''); // split a game to an array of charaters
+  const game = [];
+  for (let j = 0; j < characters.length; j = j + 1) { // loop all charaters
+    const character = characters[j];
+    const n = parseInt(character);
+    game.push(n);
   }
-  locations.push(coordinate);
+  games.push(game);
 }
