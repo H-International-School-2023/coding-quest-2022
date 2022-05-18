@@ -49,9 +49,62 @@ function checkWinnerByRows(c1, c2, c3, c4, c5, c6, c7) {
   return result;
 }
 
+function checkWinnerByColumns(c1, c2, c3, c4, c5, c6, c7) {
+
+  for (let i = 0; i < 4 && result !== -1; i = i + 1 ) {
+    if (
+      c1[i] === c1[i + 1] && c1[i + 1] === c1[i + 2] && c1[i + 2] === c1[i + 3] && c1[i + 3] === c1[i + 4]
+    ) {
+      result = c1[i];
+    }
+    if (
+      c2[i] === c2[i + 1] && c2[i + 1] === c2[i + 2] && c2[i + 2] === c2[i + 3] && c2[i + 3] === c2[i + 4]
+    ) {
+      result = c2[i];
+    }
+    if (
+      c3[i] === c3[i + 1] && c3[i + 1] === c3[i + 2] && c3[i + 2] === c3[i + 3] && c3[i + 3] === c3[i + 4]
+    ) {
+      result = c3[i];
+    }
+    if (
+      c4[i] === c4[i + 1] && c4[i + 1] === c4[i + 2] && c4[i + 2] === c4[i + 3] && c4[i + 3] === c4[i + 4]
+    ) {
+      result = c4[i];
+    }
+    if (
+      c5[i] === c5[i + 1] && c5[i + 1] === c5[i + 2] && c5[i + 2] === c5[i + 3] && c5[i + 3] === c5[i + 4]
+    ) {
+      result = c5[i];
+    }
+    if (
+      c6[i] === c6[i + 1] && c6[i + 1] === c6[i + 2] && c6[i + 2] === c6[i + 3] && c6[i + 3] === c6[i + 4]
+    ) {
+      result = c6[i];
+    }
+    if (
+      c7[i] === c7[i + 1] && c7[i + 1] === c7[i + 2] && c7[i + 2] === c7[i + 3] && c7[i + 3] === c7[i + 4]
+    ) {
+      result = c7[i];
+    }
+  }
+
+  return result;
+}
+
+function checkWinnerByDiagonals(c1, c2, c3, c4, c5, c6, c7) {
+  
+}
+
 function checkWinner(c1, c2, c3, c4, c5, c6, c7) {
 
-  checkWinnerByRows();
+  let winner = checkWinnerByRows(c1, c2, c3, c4, c5, c6, c7);
+  if (winner !== -1) {
+    winner = checkWinnerByColumns(c1, c2, c3, c4, c5, c6, c7);
+  }
+  if (winner !== -1) {
+    winner = checkWinnerByDiagonals(c1, c2, c3, c4, c5, c6, c7);
+  }
 }
 
 const fileData = fs.readFileSync('./sample_data', 'utf-8');
