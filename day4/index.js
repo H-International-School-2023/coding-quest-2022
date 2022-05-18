@@ -36,13 +36,20 @@ function checkWinnerByRows(c1, c2, c3, c4, c5, c6, c7) {
 
   let result = -1;
   for (let i = 0; i < 7 && result === -1; i = i + 1) {
-    if (
-      (c1[i] === c2[i] && c2[i] === c3[i] && c3[i] === c4[i])
-      || (c2[i] === c3[i] && c3[i] === c4[i] && c4[i] === c5[i])
-      || (c3[i] === c4[i] && c4[i] === c5[i] && c5[i] === c6[i])
-      || (c4[i] === c5[i] && c5[i] === c6[i] && c6[i] === c7[i])
-    ) {
+    if (c1[i] !== 0 && c1[i] === c2[i] && c2[i] === c3[i] && c3[i] === c4[i]) {
       result = c1[i];
+    }
+
+    if (c2[i] !== 0 && c2[i] === c3[i] && c3[i] === c4[i] && c4[i] === c5[i]) {
+      result = c2[i];
+    }
+
+    if (c3[i] !== 0 && c3[i] === c4[i] && c4[i] === c5[i] && c5[i] === c6[i]) {
+      result = c3[i];
+    }
+
+    if (c4[i] !== 0 && c4[i] === c5[i] && c5[i] === c6[i] && c6[i] === c7[i]) {
+      result = c4[i];
     }
   }
 
@@ -51,39 +58,40 @@ function checkWinnerByRows(c1, c2, c3, c4, c5, c6, c7) {
 
 function checkWinnerByColumns(c1, c2, c3, c4, c5, c6, c7) {
 
+  let result = -1;
   for (let i = 0; i < 4 && result !== -1; i = i + 1 ) {
     if (
-      c1[i] === c1[i + 1] && c1[i + 1] === c1[i + 2] && c1[i + 2] === c1[i + 3] && c1[i + 3] === c1[i + 4]
+      c1[i] !== 0 && c1[i] === c1[i + 1] && c1[i + 1] === c1[i + 2] && c1[i + 2] === c1[i + 3] && c1[i + 3] === c1[i + 4]
     ) {
       result = c1[i];
     }
     if (
-      c2[i] === c2[i + 1] && c2[i + 1] === c2[i + 2] && c2[i + 2] === c2[i + 3] && c2[i + 3] === c2[i + 4]
+      c2[i] !== 0 && c2[i] === c2[i + 1] && c2[i + 1] === c2[i + 2] && c2[i + 2] === c2[i + 3] && c2[i + 3] === c2[i + 4]
     ) {
       result = c2[i];
     }
     if (
-      c3[i] === c3[i + 1] && c3[i + 1] === c3[i + 2] && c3[i + 2] === c3[i + 3] && c3[i + 3] === c3[i + 4]
+      c3[i] !== 0 && c3[i] === c3[i + 1] && c3[i + 1] === c3[i + 2] && c3[i + 2] === c3[i + 3] && c3[i + 3] === c3[i + 4]
     ) {
       result = c3[i];
     }
     if (
-      c4[i] === c4[i + 1] && c4[i + 1] === c4[i + 2] && c4[i + 2] === c4[i + 3] && c4[i + 3] === c4[i + 4]
+      c4[i] !== 0 && c4[i] === c4[i + 1] && c4[i + 1] === c4[i + 2] && c4[i + 2] === c4[i + 3] && c4[i + 3] === c4[i + 4]
     ) {
       result = c4[i];
     }
     if (
-      c5[i] === c5[i + 1] && c5[i + 1] === c5[i + 2] && c5[i + 2] === c5[i + 3] && c5[i + 3] === c5[i + 4]
+      c5[i] !== 0 && c5[i] === c5[i + 1] && c5[i + 1] === c5[i + 2] && c5[i + 2] === c5[i + 3] && c5[i + 3] === c5[i + 4]
     ) {
       result = c5[i];
     }
     if (
-      c6[i] === c6[i + 1] && c6[i + 1] === c6[i + 2] && c6[i + 2] === c6[i + 3] && c6[i + 3] === c6[i + 4]
+      c6[i] !== 0 && c6[i] === c6[i + 1] && c6[i + 1] === c6[i + 2] && c6[i + 2] === c6[i + 3] && c6[i + 3] === c6[i + 4]
     ) {
       result = c6[i];
     }
     if (
-      c7[i] === c7[i + 1] && c7[i + 1] === c7[i + 2] && c7[i + 2] === c7[i + 3] && c7[i + 3] === c7[i + 4]
+      c7[i] !== 0 && c7[i] === c7[i + 1] && c7[i + 1] === c7[i + 2] && c7[i + 2] === c7[i + 3] && c7[i + 3] === c7[i + 4]
     ) {
       result = c7[i];
     }
@@ -93,21 +101,42 @@ function checkWinnerByColumns(c1, c2, c3, c4, c5, c6, c7) {
 }
 
 function checkWinnerByDiagonals(c1, c2, c3, c4, c5, c6, c7) {
-  
+  const c = [c1, c2, c3, c4, c5, c6, c7];
+
+  let result = -1;
+  for (let i = 0; i < 4 && result === -1; i = i + 1) {
+    const currentColumn = c[i];
+    const currentColumn1 = c[i + 1];
+    const currentColumn2 = c[i + 2];
+    const currentColumn3 = c[i + 3];
+
+    for (let j = 0; j < 4 && result === -1; j = j + 1) {
+      if (
+        currentColumn[j] !== 0 && currentColumn[j] === currentColumn1[j + 1] && currentColumn1[j + 1] === currentColumn2[j + 2] && currentColumn2[j + 2] === currentColumn3[j + 3]
+      ) {
+        result = currentColumn[j];
+      }
+    }
+  }
+
+  return result;
 }
 
 function checkWinner(c1, c2, c3, c4, c5, c6, c7) {
 
   let winner = checkWinnerByRows(c1, c2, c3, c4, c5, c6, c7);
-  if (winner !== -1) {
+
+  if (winner === -1) {
     winner = checkWinnerByColumns(c1, c2, c3, c4, c5, c6, c7);
   }
-  if (winner !== -1) {
+  if (winner === -1) {
     winner = checkWinnerByDiagonals(c1, c2, c3, c4, c5, c6, c7);
   }
+
+  return winner;
 }
 
-const fileData = fs.readFileSync('./sample_data', 'utf-8');
+const fileData = fs.readFileSync('./data', 'utf-8');
 
 const rows = fileData.split('\n');
 
@@ -157,3 +186,6 @@ for (let i = 0; i < games.length; i = i + 1) { // loop all the games
     p3Wins = p3Wins + 1;
   }
 }
+
+console.log(p1Wins, p2Wins, p3Wins);
+console.log(p1Wins * p2Wins * p3Wins);
